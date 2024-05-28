@@ -37,6 +37,9 @@
             color: #00ff00;
             text-decoration: none;
         }
+        .nav .links a:hover {
+            text-decoration: underline;
+        }
         .main-content {
             display: flex;
             flex-direction: column;
@@ -78,26 +81,77 @@
         .profile-img {
             margin-top: 30px;
         }
+        .post {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #d4d4d4;
+        }
+        .post .post-title {
+            color: #00ff00;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="nav">
         <div class="logo">colecancreate</div>
         <div class="links">
-            <a href="#home">/home</a>
-            <a href="#posts">/posts</a>
-            <a href="#contact">/contact</a>
+            <a href="#home" target="_blank">/home</a>
+            <a href="#posts" target="_blank">/posts</a>
+            <a href="#contact" target="_blank">/contact</a>
         </div>
     </div>
-    <div class="main-content">
-        <div class="header">Hi, I'm <span class="highlight">Cole</span>.</div>
+    <div class="main-content" id="home">
+        <div class="header">Hi, I'm <span class="highlight">COLECANCREATE</span>.</div>
         <div class="about">About me - "will update soon"</div>
-        <img src="ford.jpg" alt="Profile Image" class="profile-img" width="200" height="150">
+        <img src="ford.jpg" alt="Profile Image" class="profile-img" width="150" height="150">
         <div class="latest-post">
             <div class="title">Latest post:</div>
-            <a href="#">Hello, world!</a>
-            <div>This is me welcoming you all to the publification of my website!</div>
+            <a href="#">IoT Hacking and Rickrolling My High School District</a>
+            <div>This is the story of how I created a botnet of IPTVs to rickroll 10,000+ students for my senior prank.</div>
         </div>
     </div>
+    <div class="main-content" id="posts" style="display: none;">
+        <div class="post">
+            <div class="post-title">Hello, World!</div>
+            <div class="post-description">This is me welcoming you all to the publification of my website!</div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const name = "COLECANCREATE";
+            const about = "About me - \"will update soon\"";
+            
+            typeWriterEffect("name", name, 100);
+            typeWriterEffect("about", about, 100);
+
+            const postTitle = "Hello, World!";
+            const postDescription = "This is me welcoming you all to the publification of my website!";
+            
+            typeWriterEffect("posts", postTitle + "\n" + postDescription, 100);
+        });
+
+        function typeWriterEffect(elementId, text, delay) {
+            let element = document.getElementById(elementId);
+            let i = 0;
+            element.innerHTML = ''; // Clear the content before typing
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, delay);
+                }
+            }
+            type();
+        }
+
+        function copyText(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Copied to clipboard!");
+            });
+        }
+    </script>
 </body>
 </html>
