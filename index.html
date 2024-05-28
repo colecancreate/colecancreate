@@ -7,27 +7,98 @@
     <style>
         body {
             background-color: black;
-            color: #00FF00;
+            color: #d4d4d4;
             font-family: 'Courier New', Courier, monospace;
             margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
+            padding: 20px;
         }
-        header {
+        .nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1e1e1e;
+        }
+        .nav .logo {
+            color: #ffffff;
+            font-size: 1.5em;
+        }
+        .nav .links {
+            display: flex;
+            gap: 15px;
+        }
+        .nav .links a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .header {
             font-size: 2em;
-            margin-bottom: 20px;
+            color: #ffffff;
+            text-align: center;
         }
-        section {
-            font-size: 1.2em;
+        .header .highlight {
+            color: #00ff00;
+        }
+        .about {
+            font-size: 1em;
+            color: #d4d4d4;
+            text-align: center;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+        .latest-post {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            max-width: 600px;
+            text-align: left;
+        }
+        .latest-post .title {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        .latest-post a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        .profile-img {
+            border-radius: 50%;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
-    <header>colecancreate</header>
-    <section>About me - "will update soon"</section>
+    <div class="nav">
+        <div class="logo">colecancreate</div>
+        <div class="links">
+            <a href="#home">/home</a>
+            <a href="#posts">/posts</a>
+            <a href="#contact">/contact</a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="header">Hi, I'm <span class="highlight">Cole</span>.</div>
+        <div class="about">About me - "will update soon"</div>
+        <img src="ford.jpg" alt="Profile Image" class="profile-img" width="150" height="150">
+        <div class="latest-post">
+            <div class="title">Latest post:</div>
+            <a href="#">Hello, world!</a>
+            <div>This is me welcoming you all to the publification of my website!</div>
+        </div>
+    </div>
 </body>
 </html>
