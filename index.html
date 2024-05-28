@@ -16,18 +16,35 @@
             justify-content: flex-start;
             height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
         .nav {
-            width: 100%;
+            width: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
             background-color: #1e1e1e;
+            position: fixed;
+            top: 0;
+            left: 0; /* Adjusted to start from the left */
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            animation: expandNav 2s forwards; /* Adjusted animation duration */
+        }
+        @keyframes expandNav {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
         }
         .nav .logo {
             color: #ffffff;
             font-size: 1.5em;
+            overflow: hidden;
+            white-space: nowrap;
         }
         .nav .links {
             display: flex;
@@ -36,22 +53,56 @@
         .nav .links a {
             color: #00ff00;
             text-decoration: none;
+            cursor: pointer;
         }
         .nav .links a:hover {
             text-decoration: underline;
         }
         .main-content {
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: center;
-            margin-top: 50px;
+            margin-top: 80px; /* Adjust for fixed nav bar */
+            width: 100%;
+        }
+        .main-content.active {
+            display: flex;
         }
         .header {
             font-size: 2em;
             color: #ffffff;
             text-align: center;
+            opacity: 0; /* Initially hidden */
+            animation: fadeIn 2s forwards; /* Fade in animation */
         }
-        .header .highlight {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .header span {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #00ff00;
+            animation: typing 5s steps(40) forwards, blink 0.5s infinite alternate;
+        }
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: auto; /* Typing animation expands to fit content */
+            }
+        }
+        @keyframes blink {
+            to {
+                border-color: transparent;
+            }
+        }
+        .highlight {
             color: #00ff00;
         }
         .about {
@@ -61,7 +112,7 @@
             margin-top: 20px;
             max-width: 600px;
         }
-        .latest-post {
+        .post-button, .post-box {
             background-color: #1e1e1e;
             color: #d4d4d4;
             padding: 20px;
@@ -69,14 +120,14 @@
             margin-top: 30px;
             max-width: 600px;
             text-align: left;
+            cursor: pointer;
         }
-        .latest-post .title {
+        .post-button:hover, .post-box:hover {
+            background-color: #2e2e2e;
+        }
+        .post-box .title {
             color: #00ff00;
             font-weight: bold;
-        }
-        .latest-post a {
-            color: #00ff00;
-            text-decoration: none;
         }
         .profile-img {
             margin-top: 30px;
@@ -91,66 +142,72 @@
             font-size: 1.2em;
             margin-bottom: 10px;
         }
+        .post-description {
+            font-size: 1em;
+            color: #d4d4d4;
+        }
     </style>
 </head>
 <body>
     <div class="nav">
         <div class="logo">colecancreate</div>
         <div class="links">
-            <a href="#home" target="_blank">/home</a>
-            <a href="#posts" target="_blank">/posts</a>
-            <a href="#contact" target="_blank">/contact</a>
+            <a href="#home" onclick="showSection('home')">/home</a>
+            <a href="#posts" onclick="showSection('posts')">/posts</a>
+            <a href="#contact" onclick="showSection('contact')">/contact</a>
         </div>
     </div>
     <div class="main-content" id="home">
-        <div class="header">Hi, I'm <span class="highlight">COLECANCREATE</span>.</div>
+        <div class="header">Hi, I'm <span class="highlight">Cole</span>.</div>
         <div class="about">About me - "will update soon"</div>
         <img src="ford.jpg" alt="Profile Image" class="profile-img" width="150" height="150">
-        <div class="latest-post">
-            <div class="title">Latest post:</div>
-            <a href="#">IoT Hacking and Rickrolling My High School District</a>
-            <div>This is the story of how I created a botnet of IPTVs to rickroll 10,000+ students for my senior prank.</div>
+        <div class="post-button" onclick="showPost('helloworld')">
+            <div class="title">Hello, World!</div>
+            <div>This is me welcoming you all to the publification of my website!</div>
         </div>
     </div>
-    <div class="main-content" id="posts" style="display: none;">
-        <div class="post">
-            <div class="post-title">Hello, World!</div>
-            <div class="post-description">This is me welcoming you all to the publification of my website!</div>
+    <div class="main-content" id="posts">
+        <div class="post-box" onclick="showPost('helloworld')">
+            <div class="title">Hello, World!</div>
+            <div>This is me welcoming you all to the publification of my website!</div>
         </div>
+    </div>
+    <div class="main-content" id="contact">
+        <div class="header">Contact</div>
+        <div class="about">Email: contact@colecancreate.com</div>
+    </div>
+    <div class="main-content" id="helloworld">
+        <div class="header">Hello, World!</div>
+        <div class="post-description">This is me welcoming you all to the publification of my website!</div>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const name = "COLECANCREATE";
-            const about = "About me - \"will update soon\"";
-            
-            typeWriterEffect("name", name, 100);
-            typeWriterEffect("about", about, 100);
-
-            const postTitle = "Hello, World!";
-            const postDescription = "This is me welcoming you all to the publification of my website!";
-            
-            typeWriterEffect("posts", postTitle + "\n" + postDescription, 100);
+            const hash = window.location.hash.substring(1) || 'home';
+            showSection(hash);
         });
 
-        function typeWriterEffect(elementId, text, delay) {
-            let element = document.getElementById(elementId);
-            let i = 0;
-            element.innerHTML = ''; // Clear the content before typing
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, delay);
-                }
+        window.onpopstate = function(event) {
+            const hash = window.location.hash.substring(1);
+            showSection(hash);
+        };
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.main-content');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show the selected section
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
             }
-            type();
+
+            // Update the URL hash
+            history.pushState(null, null, `#${sectionId}`);
         }
 
-        function copyText(elementId) {
-            const text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Copied to clipboard!");
-            });
+        function showPost(postId) {
+            showSection(postId);
         }
     </script>
 </body>
