@@ -92,14 +92,14 @@
             white-space: nowrap;
             overflow: hidden;
             font-family: 'Courier New', Courier, monospace;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff00 }
         }
         .highlight {
             color: #00ff00;
-        }
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
         }
         .about {
             font-size: 1em;
@@ -161,12 +161,10 @@
         <div class="content-wrapper">
             <div class="text-container">
                 <div class="header">
-                    <div class="typing-container" id="typing-container">
-                        <span id="part1">Hi, I'm </span><span id="part2" class="highlight">Cole</span><span id="part3">.</span>
-                    </div>
+                    <div class="typing-container" id="typing-container"></div>
                 </div>
                 <div class="about">I'm a 17 year old in their senior year at Middleburg High School. </div> 
-		<div class="about">In my free time, I play video games and give my cat love. </div>
+                <div class="about">In my free time, I play video games and give my cat love. </div>
                 <div class="post-box" onclick="showPost('helloworld')">
                     <div class="title">Hello, World!</div>
                     <div>This is me welcoming you all to the publification of my website!</div>
@@ -216,39 +214,44 @@
         }
 
         function startTypingEffect() {
-            const part1 = document.getElementById('part1').textContent;
-            const part2 = document.getElementById('part2').textContent;
-            const part3 = document.getElementById('part3').textContent;
+            const part1 = "Hi, I'm ";
+            const part2 = "Cole";
+            const part3 = ".";
+            const typingContainer = document.getElementById('typing-container');
 
-            document.getElementById('part1').textContent = '';
-            document.getElementById('part2').textContent = '';
-            document.getElementById('part3').textContent = '';
+            typingContainer.innerHTML = '';
 
-            let index1 = 0, index2 = 0, index3 = 0;
+            let index1 = 0;
+            let index2 = 0;
+            let index3 = 0;
 
             function typePart1() {
                 if (index1 < part1.length) {
-                    document.getElementById('part1').textContent += part1[index1];
+                    typingContainer.innerHTML += part1[index1];
                     index1++;
                     setTimeout(typePart1, 100);
                 } else {
+                    typingContainer.innerHTML += "<span class='highlight' id='highlight-part'></span>";
                     typePart2();
                 }
             }
 
             function typePart2() {
+                const highlightPart = document.getElementById('highlight-part');
                 if (index2 < part2.length) {
-                    document.getElementById('part2').textContent += part2[index2];
+                    highlightPart.innerHTML += part2[index2];
                     index2++;
                     setTimeout(typePart2, 100);
                 } else {
+                    typingContainer.innerHTML += "<span id='part3'></span>";
                     typePart3();
                 }
             }
 
             function typePart3() {
+                const part3Container = document.getElementById('part3');
                 if (index3 < part3.length) {
-                    document.getElementById('part3').textContent += part3[index3];
+                    part3Container.innerHTML += part3[index3];
                     index3++;
                     setTimeout(typePart3, 100);
                 }
