@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
         .nav {
-            width: 98.5%;
+            width: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -30,43 +30,162 @@
             left: 0;
             z-index: 1000;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            animation: expandNav 2s forwards;
+        }
+        @keyframes expandNav {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 98.5%;
+            }
         }
         .nav .logo {
-            font-size: 24px;
-            color: white;
+            color: #ffffff;
+            font-size: 1.5em;
+            overflow: hidden;
+            white-space: nowrap;
         }
         .nav .links {
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
         .nav .links a {
             color: #00ff00;
             text-decoration: none;
+            cursor: pointer;
         }
-        h1 {
-            color: white;
-            font-size: 48px;
+        .nav .links a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 80px;
+            width: 100%;
+        }
+        .main-content.active {
+            display: flex;
+            flex-direction: column; /* Changed to column */
+            align-items: center;
+        }
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 80%; /* Ensure there's a gap on both sides */
+            max-width: 1200px; /* Limit the width for better readability */
+        }
+        .text-container {
+            max-width: 60%;
+        }
+        .header {
+            font-size: 2em;
+            color: #ffffff;
+            text-align: left;
+        }
+        .typing-container {
+            display: inline-block;
+            border-right: 2px solid #00ff00;
+            white-space: nowrap;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff00 }
         }
         .highlight {
             color: #00ff00;
         }
-        .container {
+        .about {
+            font-size: 1em;
+            color: #d4d4d4;
+            text-align: left;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+        .post-button, .post-box {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            width: 600px; /* Set width to 600px */
+            text-align: left;
+            cursor: pointer;
+        }
+        .post-button:hover, .post-box:hover {
+            background-color: #2e2e2e;
+        }
+        .post-box .title {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        .profile-img {
+            margin-top: 30px;
+            margin-left: 20px;
+            width: 400px; /* Increased width */
+            height: 300px; /* Height adjusted to maintain aspect ratio */
+            border-radius: 20px; /* Added border-radius for rounded edges */
+        }
+        .post {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #d4d4d4;
+        }
+        .post .post-title {
+            color: #00ff00;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .post-description {
+            font-size: 1em;
+            color: #d4d4d4;
+        }
+        .post-meta {
+            font-size: 0.8em;
+            color: #d4d4d4;
+        }
+        .login-form, .post-form {
+            display: none;
+            flex-direction: column;
             background-color: #1e1e1e;
             padding: 20px;
-            border-radius: 8px;
-            margin-top: 80px;
-            max-width: 600px;
-            text-align: center;
-        }
-        .container p {
-            margin: 10px 0;
-        }
-        .right-side img {
-            max-width: 100%;
             border-radius: 10px;
+            max-width: 600px;
         }
-        .right-side {
-            text-align: center;
+        .login-form.active, .post-form.active {
+            display: flex;
+        }
+        .login-form input, .post-form input, .post-form textarea {
+            background-color: #2e2e2e;
+            color: #d4d4d4;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .login-form button, .post-form button {
+            background-color: #00ff00;
+            color: black;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .login-form button:hover, .post-form button:hover {
+            background-color: #00cc00;
+        }
+        .login-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: #00ff00;
+            text-decoration: underline;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -74,22 +193,175 @@
     <div class="nav">
         <div class="logo">colecancreate</div>
         <div class="links">
-            <a href="index.html">home</a>
-            <a href="projects.html">projects</a>
-            <a href="contact.html">contact</a>
-            <a href="login.html">login</a>
+            <a href="#home" onclick="showSection('home')">/home</a>
+            <a href="#projects" onclick="showSection('projects')">/projects</a>
+            <a href="#contact" onclick="showSection('contact')">/contact</a>
         </div>
     </div>
-    <div class="container">
-        <h1>Hi, I'm <span class="highlight">Cole</span>.</h1>
-        <p>I'm a 17 year old in their senior year at Middleburg High School.</p>
-        <p>In my free time, I play video games and give my cat love.</p>
-        <div class="right-side">
-            <img src="image.png" alt="Cole with cat">
-        </div>
-        <div class="right-side">
-            <img src="image.png" alt="Cole with cat">
+    <div class="main-content" id="home">
+        <div class="content-wrapper">
+            <div class="text-container">
+                <div class="header">
+                    <div class="typing-container" id="typing-container"></div>
+                </div>
+                <div class="about">I'm a 17 year old in their senior year at Middleburg High School. </div> 
+                <div class="about">In my free time, I play video games and give my cat love. </div>
+                <div class="post-box" onclick="showPost('helloworld')">
+                    <div class="title">Hello, World!</div>
+                    <div>This is me welcoming you all to the publification of my website!</div>
+                </div>
+            </div>
+            <img src="ford.jpg" alt="Profile Image" class="profile-img">
         </div>
     </div>
+    <div class="main-content" id="projects">
+        <div class="about">These are projects that I have done that I wanted to showcase.</div>
+        <div class="post-box" onclick="showPost('helloworld')">
+            <div class="title">Hello, World!</div>
+            <div>This is me welcoming you all to the publification of my website!</div>
+        </div>
+        <form class="login-form" id="login-form" onsubmit="handleLogin(event)">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <form class="post-form" id="post-form" onsubmit="addPost(event)">
+            <input type="text" id="post-title" placeholder="Post Name" required>
+            <input type="text" id="post-summary" placeholder="Post Summary" required>
+            <input type="date" id="post-date" placeholder="Date Created" required>
+            <input type="text" id="post-time" placeholder="Time to Read" required>
+            <textarea id="post-content" placeholder="Post Content" required></textarea>
+            <button type="submit">Add Post</button>
+        </form>
+    </div>
+    <div class="main-content" id="contact">
+        <div class="header">Contact</div>
+        <div class="about">Email: <span class="highlight">evancolecarter@outlook.com</span></div>
+    </div>
+    <div class="main-content" id="helloworld">
+        <div class="header">Hello, World!</div>
+        <div class="post-description">This is me welcoming you all to the publification of my website!</div>
+    </div>
+    <div class="login-link" onclick="showLoginForm()">Login</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const hash = window.location.hash.substring(1) || 'home';
+            showSection(hash);
+            startTypingEffect();
+        });
+
+        window.onpopstate = function(event) {
+            const hash = window.location.hash.substring(1);
+            showSection(hash);
+        };
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.main-content');
+            sections.forEach(section => section.classList.remove('active'));
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+            }
+            history.pushState(null, null, `#${sectionId}`);
+        }
+
+        function showPost(postId) {
+            showSection(postId);
+        }
+
+        function startTypingEffect() {
+            const part1 = "Hi, I'm ";
+            const part2 = "Cole";
+            const part3 = ".";
+            const typingContainer = document.getElementById('typing-container');
+
+            typingContainer.innerHTML = '';
+
+            let index1 = 0;
+            let index2 = 0;
+            let index3 = 0;
+
+            function typePart1() {
+                if (index1 < part1.length) {
+                    typingContainer.innerHTML += part1[index1];
+                    index1++;
+                    setTimeout(typePart1, 100);
+                } else {
+                    typingContainer.innerHTML += "<span class='highlight' id='highlight-part'></span>";
+                    typePart2();
+                }
+            }
+
+            function typePart2() {
+                const highlightPart = document.getElementById('highlight-part');
+                if (index2 < part2.length) {
+                    highlightPart.innerHTML += part2[index2];
+                    index2++;
+                    setTimeout(typePart2, 100);
+                } else {
+                    typingContainer.innerHTML += "<span id='part3'></span>";
+                    typePart3();
+                }
+            }
+
+            function typePart3() {
+                const part3Container = document.getElementById('part3');
+                if (index3 < part3.length) {
+                    part3Container.innerHTML += part3[index3];
+                    index3++;
+                    setTimeout(typePart3, 100);
+                }
+            }
+
+            typePart1();
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form').classList.add('active');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'Cole' && password === 'ecEC2007$$') {
+                document.getElementById('login-form').classList.remove('active');
+                document.getElementById('post-form').classList.add('active');
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+
+        function addPost(event) {
+            event.preventDefault();
+            const title = document.getElementById('post-title').value;
+            const summary = document.getElementById('post-summary').value;
+            const date = document.getElementById('post-date').value;
+            const time = document.getElementById('post-time').value;
+            const content = document.getElementById('post-content').value;
+
+            const newPost = document.createElement('div');
+            newPost.className = 'post-box';
+            newPost.innerHTML = `<div class="title">${title}</div>
+                                 <div class="post-meta">${date} - ${time} min read</div>
+                                 <div>${summary}</div>`;
+            newPost.onclick = () => showPost(title.toLowerCase().replace(/ /g, ''));
+
+            const projectsSection = document.getElementById('projects');
+            const referenceNode = projectsSection.querySelector('.about').nextSibling;
+            projectsSection.insertBefore(newPost, referenceNode);
+
+            const fullPost = document.createElement('div');
+            fullPost.className = 'main-content';
+            fullPost.id = title.toLowerCase().replace(/ /g, '');
+            fullPost.innerHTML = `<div class="header">${title}</div>
+                                  <div class="post-description">${content}</div>`;
+            document.body.appendChild(fullPost);
+
+            document.getElementById('post-form').reset();
+            document.getElementById('post-form').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
