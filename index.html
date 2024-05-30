@@ -27,10 +27,10 @@
             background-color: #1e1e1e;
             position: fixed;
             top: 0;
-            left: 0; /* Adjusted to start from the left */
+            left: 0;
             z-index: 1000;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            animation: expandNav 2s forwards; /* Adjusted animation duration */
+            animation: expandNav 2s forwards;
         }
         @keyframes expandNav {
             0% {
@@ -62,53 +62,49 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            margin-top: 80px; /* Adjust for fixed nav bar */
+            margin-top: 80px;
             width: 100%;
         }
         .main-content.active {
             display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 80%; /* Ensure there's a gap on both sides */
+            max-width: 1200px; /* Limit the width for better readability */
+        }
+        .text-container {
+            max-width: 60%;
         }
         .header {
             font-size: 2em;
             color: #ffffff;
-            text-align: center;
-            opacity: 0; /* Initially hidden */
-            animation: fadeIn 2s forwards; /* Fade in animation */
+            text-align: left;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        .header span {
-            overflow: hidden;
-            white-space: nowrap;
+        .typing-container {
+            display: inline-block;
             border-right: 2px solid #00ff00;
-            animation: typing 5s steps(40) forwards, blink 0.5s infinite alternate;
-        }
-        @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: auto; /* Typing animation expands to fit content */
-            }
-        }
-        @keyframes blink {
-            to {
-                border-color: transparent;
-            }
+            white-space: nowrap;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
         }
         .highlight {
             color: #00ff00;
         }
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
         .about {
             font-size: 1em;
             color: #d4d4d4;
-            text-align: center;
+            text-align: left;
             margin-top: 20px;
             max-width: 600px;
         }
@@ -131,6 +127,10 @@
         }
         .profile-img {
             margin-top: 30px;
+            margin-left: 20px;
+            width: 400px; /* Increased width */
+            height: 300px; /* Height adjusted to maintain aspect ratio */
+            border-radius: 20px; /* Added border-radius for rounded edges */
         }
         .post {
             margin-top: 20px;
@@ -158,12 +158,21 @@
         </div>
     </div>
     <div class="main-content" id="home">
-        <div class="header">Hi, I'm <span class="highlight">Cole</span>.</div>
-        <div class="about">About me - "will update soon"</div>
-        <img src="ford.jpg" alt="Profile Image" class="profile-img" width="150" height="150">
-        <div class="post-box" onclick="showPost('helloworld')">
-            <div class="title">Hello, World!</div>
-            <div>This is me welcoming you all to the publification of my website!</div>
+        <div class="content-wrapper">
+            <div class="text-container">
+                <div class="header">
+                    <div class="typing-container" id="typing-container">
+                        <span id="part1">Hi, I'm </span><span id="part2" class="highlight">Cole</span><span id="part3">.</span>
+                    </div>
+                </div>
+                <div class="about">I'm a 17 year old in their senior year at Middleburg High School. </div> 
+		<div class="about">In my free time, I play video games and give my cat love. </div>
+                <div class="post-box" onclick="showPost('helloworld')">
+                    <div class="title">Hello, World!</div>
+                    <div>This is me welcoming you all to the publification of my website!</div>
+                </div>
+            </div>
+            <img src="ford.jpg" alt="Profile Image" class="profile-img">
         </div>
     </div>
     <div class="main-content" id="posts">
@@ -184,6 +193,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             const hash = window.location.hash.substring(1) || 'home';
             showSection(hash);
+            startTypingEffect();
         });
 
         window.onpopstate = function(event) {
@@ -192,22 +202,59 @@
         };
 
         function showSection(sectionId) {
-            // Hide all sections
             const sections = document.querySelectorAll('.main-content');
             sections.forEach(section => section.classList.remove('active'));
-
-            // Show the selected section
             const section = document.getElementById(sectionId);
             if (section) {
                 section.classList.add('active');
             }
-
-            // Update the URL hash
             history.pushState(null, null, `#${sectionId}`);
         }
 
         function showPost(postId) {
             showSection(postId);
+        }
+
+        function startTypingEffect() {
+            const part1 = document.getElementById('part1').textContent;
+            const part2 = document.getElementById('part2').textContent;
+            const part3 = document.getElementById('part3').textContent;
+
+            document.getElementById('part1').textContent = '';
+            document.getElementById('part2').textContent = '';
+            document.getElementById('part3').textContent = '';
+
+            let index1 = 0, index2 = 0, index3 = 0;
+
+            function typePart1() {
+                if (index1 < part1.length) {
+                    document.getElementById('part1').textContent += part1[index1];
+                    index1++;
+                    setTimeout(typePart1, 100);
+                } else {
+                    typePart2();
+                }
+            }
+
+            function typePart2() {
+                if (index2 < part2.length) {
+                    document.getElementById('part2').textContent += part2[index2];
+                    index2++;
+                    setTimeout(typePart2, 100);
+                } else {
+                    typePart3();
+                }
+            }
+
+            function typePart3() {
+                if (index3 < part3.length) {
+                    document.getElementById('part3').textContent += part3[index3];
+                    index3++;
+                    setTimeout(typePart3, 100);
+                }
+            }
+
+            typePart1();
         }
     </script>
 </body>
