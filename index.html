@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>colecancreate - Coding Portfolio</title>
+    <title>ColeCanCreate</title>
+    <link rel="icon" type="image/png" href="C.png">
     <style>
         body {
             background-color: black;
@@ -67,15 +68,15 @@
         }
         .main-content.active {
             display: flex;
-            flex-direction: column; /* Changed to column */
+            flex-direction: column;
             align-items: center;
         }
         .content-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            width: 80%; /* Ensure there's a gap on both sides */
-            max-width: 1200px; /* Limit the width for better readability */
+            width: 80%;
+            max-width: 1200px;
         }
         .text-container {
             max-width: 60%;
@@ -107,29 +108,34 @@
             margin-top: 20px;
             max-width: 600px;
         }
-        .post-button, .post-box {
+        .post-box {
             background-color: #1e1e1e;
             color: #d4d4d4;
             padding: 20px;
             border-radius: 10px;
             margin-top: 30px;
-            width: 600px; /* Set width to 600px */
+            width: 600px;
             text-align: left;
             cursor: pointer;
         }
-        .post-button:hover, .post-box:hover {
+        .post-box:hover {
             background-color: #2e2e2e;
         }
         .post-box .title {
             color: #00ff00;
             font-weight: bold;
         }
+        .post-box .meta {
+            font-size: 0.9em;
+            color: #aaaaaa;
+            margin-top: 5px;
+        }
         .profile-img {
             margin-top: 30px;
             margin-left: 20px;
-            width: 400px; /* Increased width */
-            height: 300px; /* Height adjusted to maintain aspect ratio */
-            border-radius: 20px; /* Added border-radius for rounded edges */
+            width: 400px;
+            height: 300px;
+            border-radius: 20px;
         }
         .post {
             margin-top: 20px;
@@ -142,50 +148,41 @@
             margin-bottom: 10px;
         }
         .post-description {
-            font-size: 1em;
-            color: #d4d4d4;
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.6em;
         }
         .post-meta {
             font-size: 0.8em;
             color: #d4d4d4;
         }
-        .login-form, .post-form {
-            display: none;
-            flex-direction: column;
+        .post-page {
+            width: 80%;
+            max-width: 800px;
             background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            max-width: 600px;
+            margin-top: 20px;
         }
-        .login-form.active, .post-form.active {
-            display: flex;
-        }
-        .login-form input, .post-form input, .post-form textarea {
-            background-color: #2e2e2e;
-            color: #d4d4d4;
-            border: 1px solid #00ff00;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-        .login-form button, .post-form button {
-            background-color: #00ff00;
-            color: black;
-            border: none;
-            padding: 10px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .login-form button:hover, .post-form button:hover {
-            background-color: #00cc00;
-        }
-        .login-link {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+        .back-button {
             color: #00ff00;
-            text-decoration: underline;
+            text-decoration: none;
             cursor: pointer;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            text-decoration: underline;
+        }
+        .post-title {
+            font-size: 2em;
+            color: #00ff00;
+        }
+        .post-meta {
+            font-size: 0.9em;
+            color: #aaaaaa;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -208,6 +205,7 @@
                 <div class="about">In my free time, I play video games and give my cat love. </div>
                 <div class="post-box" onclick="showPost('helloworld')">
                     <div class="title">Hello, World!</div>
+                    <div class="meta">6/2/24 - 1 min read</div>
                     <div>This is me welcoming you all to the publification of my website!</div>
                 </div>
             </div>
@@ -218,42 +216,47 @@
         <div class="about">These are projects that I have done that I wanted to showcase.</div>
         <div class="post-box" onclick="showPost('helloworld')">
             <div class="title">Hello, World!</div>
+            <div class="meta">6/2/24 - 1 min read</div>
             <div>This is me welcoming you all to the publification of my website!</div>
         </div>
-        <form class="login-form" id="login-form" onsubmit="handleLogin(event)">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <form class="post-form" id="post-form" onsubmit="addPost(event)">
-            <input type="text" id="post-title" placeholder="Post Name" required>
-            <input type="text" id="post-summary" placeholder="Post Summary" required>
-            <input type="date" id="post-date" placeholder="Date Created" required>
-            <input type="text" id="post-time" placeholder="Time to Read" required>
-            <textarea id="post-content" placeholder="Post Content" required></textarea>
-            <button type="submit">Add Post</button>
-        </form>
     </div>
     <div class="main-content" id="contact">
         <div class="header">Contact</div>
         <div class="about">Email: <span class="highlight">evancolecarter@outlook.com</span></div>
     </div>
     <div class="main-content" id="helloworld">
-        <div class="header">Hello, World!</div>
-        <div class="post-description">This is me welcoming you all to the publification of my website!</div>
+        <div class="post-page">
+            <a href="#projects" class="back-button" onclick="showSection('projects')">&larr; ../</a>
+            <div class="post-title">Hello World!</div>
+            <div class="post-meta">6/2/24 - 1 min read</div>
+            <div class="post-description">
+                Hi, I'm <span class="highlight">Cole</span>.
+            </div>
+            <div class="post-description">
+                Ta-da, here's my new website! I finally reached a point where I was satisfied with the final product. Way too much time was spent working on this site because (a) I wanted to style it in a way that suits me and (b) the entire thing was coded from scratch since I dislike templates.
+            </div>
+            <div class="post-description">
+                I built the site using Gatsby, a static site generator based on the React framework. In other words, it's pretty fast.
+            </div>
+            <div class="post-description">
+                This site is also responsive and fits any screen size thanks to Bootstrap's grid system. It made web development for mobile screens simple, plus it took care of some tricky CSS issues.
+            </div>
+            <div class="post-description">
+                <!-- Space for Image -->
+                <img src="path/to/your/image.jpg" alt="Description of Image" style="width: 100%; margin-top: 20px; border-radius: 10px;">
+            </div>
+        </div>
     </div>
-    <div class="login-link" onclick="showLoginForm()">Login</div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const hash = window.location.hash.substring(1) || 'home';
-            showSection(hash);
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showSection(hash);
+            } else {
+                showSection('home');
+            }
             startTypingEffect();
         });
-
-        window.onpopstate = function(event) {
-            const hash = window.location.hash.substring(1);
-            showSection(hash);
-        };
 
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.main-content');
@@ -261,8 +264,8 @@
             const section = document.getElementById(sectionId);
             if (section) {
                 section.classList.add('active');
+                window.history.pushState(null, null, `#${sectionId}`);
             }
-            history.pushState(null, null, `#${sectionId}`);
         }
 
         function showPost(postId) {
@@ -270,97 +273,22 @@
         }
 
         function startTypingEffect() {
-            const part1 = "Hi, I'm ";
-            const part2 = "Cole";
-            const part3 = ".";
+            const text = "Hi, I'm Cole.";
+            let index = 0;
+            const speed = 200;
             const typingContainer = document.getElementById('typing-container');
 
-            typingContainer.innerHTML = '';
-
-            let index1 = 0;
-            let index2 = 0;
-            let index3 = 0;
-
-            function typePart1() {
-                if (index1 < part1.length) {
-                    typingContainer.innerHTML += part1[index1];
-                    index1++;
-                    setTimeout(typePart1, 100);
+            function type() {
+                if (index < text.length) {
+                    typingContainer.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
                 } else {
-                    typingContainer.innerHTML += "<span class='highlight' id='highlight-part'></span>";
-                    typePart2();
+                    typingContainer.style.borderRight = 'none';
                 }
             }
 
-            function typePart2() {
-                const highlightPart = document.getElementById('highlight-part');
-                if (index2 < part2.length) {
-                    highlightPart.innerHTML += part2[index2];
-                    index2++;
-                    setTimeout(typePart2, 100);
-                } else {
-                    typingContainer.innerHTML += "<span id='part3'></span>";
-                    typePart3();
-                }
-            }
-
-            function typePart3() {
-                const part3Container = document.getElementById('part3');
-                if (index3 < part3.length) {
-                    part3Container.innerHTML += part3[index3];
-                    index3++;
-                    setTimeout(typePart3, 100);
-                }
-            }
-
-            typePart1();
-        }
-
-        function showLoginForm() {
-            document.getElementById('login-form').classList.add('active');
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === 'Cole' && password === 'ecEC2007$$') {
-                document.getElementById('login-form').classList.remove('active');
-                document.getElementById('post-form').classList.add('active');
-            } else {
-                alert('Invalid credentials');
-            }
-        }
-
-        function addPost(event) {
-            event.preventDefault();
-            const title = document.getElementById('post-title').value;
-            const summary = document.getElementById('post-summary').value;
-            const date = document.getElementById('post-date').value;
-            const time = document.getElementById('post-time').value;
-            const content = document.getElementById('post-content').value;
-
-            const newPost = document.createElement('div');
-            newPost.className = 'post-box';
-            newPost.innerHTML = `<div class="title">${title}</div>
-                                 <div class="post-meta">${date} - ${time} min read</div>
-                                 <div>${summary}</div>`;
-            newPost.onclick = () => showPost(title.toLowerCase().replace(/ /g, ''));
-
-            const projectsSection = document.getElementById('projects');
-            const referenceNode = projectsSection.querySelector('.about').nextSibling;
-            projectsSection.insertBefore(newPost, referenceNode);
-
-            const fullPost = document.createElement('div');
-            fullPost.className = 'main-content';
-            fullPost.id = title.toLowerCase().replace(/ /g, '');
-            fullPost.innerHTML = `<div class="header">${title}</div>
-                                  <div class="post-description">${content}</div>`;
-            document.body.appendChild(fullPost);
-
-            document.getElementById('post-form').reset();
-            document.getElementById('post-form').classList.remove('active');
+            type();
         }
     </script>
 </body>
