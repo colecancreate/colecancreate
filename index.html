@@ -67,9 +67,8 @@
         }
         .main-content.active {
             display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column; /* Changed to column */
+            align-items: center;
         }
         .content-wrapper {
             display: flex;
@@ -114,7 +113,7 @@
             padding: 20px;
             border-radius: 10px;
             margin-top: 30px;
-            max-width: 600px;
+            width: 600px; /* Set width to 600px */
             text-align: left;
             cursor: pointer;
         }
@@ -146,6 +145,48 @@
             font-size: 1em;
             color: #d4d4d4;
         }
+        .post-meta {
+            font-size: 0.8em;
+            color: #d4d4d4;
+        }
+        .login-form, .post-form {
+            display: none;
+            flex-direction: column;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+        .login-form.active, .post-form.active {
+            display: flex;
+        }
+        .login-form input, .post-form input, .post-form textarea {
+            background-color: #2e2e2e;
+            color: #d4d4d4;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .login-form button, .post-form button {
+            background-color: #00ff00;
+            color: black;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .login-form button:hover, .post-form button:hover {
+            background-color: #00cc00;
+        }
+        .login-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: #00ff00;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -153,7 +194,7 @@
         <div class="logo">colecancreate</div>
         <div class="links">
             <a href="#home" onclick="showSection('home')">/home</a>
-            <a href="#posts" onclick="showSection('posts')">/posts</a>
+            <a href="#projects" onclick="showSection('projects')">/projects</a>
             <a href="#contact" onclick="showSection('contact')">/contact</a>
         </div>
     </div>
@@ -173,11 +214,25 @@
             <img src="ford.jpg" alt="Profile Image" class="profile-img">
         </div>
     </div>
-    <div class="main-content" id="posts">
+    <div class="main-content" id="projects">
+        <div class="about">These are projects that I have done that I wanted to showcase.</div>
         <div class="post-box" onclick="showPost('helloworld')">
             <div class="title">Hello, World!</div>
             <div>This is me welcoming you all to the publification of my website!</div>
         </div>
+        <form class="login-form" id="login-form" onsubmit="handleLogin(event)">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <form class="post-form" id="post-form" onsubmit="addPost(event)">
+            <input type="text" id="post-title" placeholder="Post Name" required>
+            <input type="text" id="post-summary" placeholder="Post Summary" required>
+            <input type="date" id="post-date" placeholder="Date Created" required>
+            <input type="text" id="post-time" placeholder="Time to Read" required>
+            <textarea id="post-content" placeholder="Post Content" required></textarea>
+            <button type="submit">Add Post</button>
+        </form>
     </div>
     <div class="main-content" id="contact">
         <div class="header">Contact</div>
@@ -187,6 +242,7 @@
         <div class="header">Hello, World!</div>
         <div class="post-description">This is me welcoming you all to the publification of my website!</div>
     </div>
+    <div class="login-link" onclick="showLoginForm()">Login</div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const hash = window.location.hash.substring(1) || 'home';
@@ -258,6 +314,53 @@
             }
 
             typePart1();
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form').classList.add('active');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'Cole' && password === 'ecEC2007$$') {
+                document.getElementById('login-form').classList.remove('active');
+                document.getElementById('post-form').classList.add('active');
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+
+        function addPost(event) {
+            event.preventDefault();
+            const title = document.getElementById('post-title').value;
+            const summary = document.getElementById('post-summary').value;
+            const date = document.getElementById('post-date').value;
+            const time = document.getElementById('post-time').value;
+            const content = document.getElementById('post-content').value;
+
+            const newPost = document.createElement('div');
+            newPost.className = 'post-box';
+            newPost.innerHTML = `<div class="title">${title}</div>
+                                 <div class="post-meta">${date} - ${time} min read</div>
+                                 <div>${summary}</div>`;
+            newPost.onclick = () => showPost(title.toLowerCase().replace(/ /g, ''));
+
+            const projectsSection = document.getElementById('projects');
+            const referenceNode = projectsSection.querySelector('.about').nextSibling;
+            projectsSection.insertBefore(newPost, referenceNode);
+
+            const fullPost = document.createElement('div');
+            fullPost.className = 'main-content';
+            fullPost.id = title.toLowerCase().replace(/ /g, '');
+            fullPost.innerHTML = `<div class="header">${title}</div>
+                                  <div class="post-description">${content}</div>`;
+            document.body.appendChild(fullPost);
+
+            document.getElementById('post-form').reset();
+            document.getElementById('post-form').classList.remove('active');
         }
     </script>
 </body>
