@@ -272,18 +272,24 @@
         }
 
         function startTypingEffect() {
-            const text = "Hi, I'm Cole.";
-            let index = 0;
+            const text = "Hi, I'm <span style='color: #00ff00;'>Cole</span>.";
             const speed = 200;
             const typingContainer = document.getElementById('typing-container');
+            let index = 0;
 
             function type() {
                 if (index < text.length) {
-                    typingContainer.textContent += text.charAt(index);
-                    index++;
+                    if (text[index] === '<') {
+                        const endTagIndex = text.indexOf('>', index) + 1;
+                        typingContainer.innerHTML += text.slice(index, endTagIndex);
+                        index = endTagIndex;
+                    } else {
+                        typingContainer.innerHTML += text[index];
+                        index++;
+                    }
                     setTimeout(type, speed);
                 } else {
-                    typingContainer.style.borderRight = 'none';
+                    typingContainer.style.borderRight = '2px solid #00ff00';
                 }
             }
 
