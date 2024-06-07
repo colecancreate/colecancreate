@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ColeCanCreate</title>
     <link rel="icon" type="image/png" href="8bit_me.png">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-AC36p2Gt/ZBOYjD8kK1Z4RVF3H/qlk/5KRy/JRxsEK9tLO4i0ivNLbMEukL+t35VjXgM/2Yvc7KGOFp9Zf4YA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             background-color: black;
@@ -31,7 +33,7 @@
             z-index: 1000;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             animation: expandNav 2s forwards;
-	    margin-top: 20px;
+            margin-top: 20px;
         }
         @keyframes expandNav {
             0% {
@@ -213,6 +215,52 @@
             color: #aaaaaa;
             margin-bottom: 20px;
         }
+        .footer {
+            background-color: #000000;
+            color: #d4d4d4;
+            padding: 5px;
+            border-radius: 10px;
+            margin-top: auto;
+            width: 550px;
+            text-align: center;
+        }
+        .footer a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+	.social-icons {
+	    display: block;
+	    justify-content: center;
+	    margin-top: 10px;
+	}
+	.social-icons img {
+	    margin: 0 0px;	
+	    vertical-align: middle;
+	}
+        .social-icons a {
+            color: #00ff00;
+            margin: 0 10px;
+            font-size: 20px;
+            text-decoration: none;
+	}
+	.github-icon {
+	    width: 32px;
+	    height: 32px;
+	}
+	.instagram-icon {
+	    width: 24px;
+	    height: 24px;
+	}	
+	.facebook-icon {
+	    width: 22px;
+	    height: 22px;
+        }
+        .social-icons a:hover {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -230,7 +278,7 @@
                 <div class="header">
                     <div class="typing-container" id="typing-container"></div>
                 </div>
-                <div class="about">I'm a 17 year old in their senior year at Middleburg High School. </div> 
+                <div class="about">I'm a 17 year old in my senior year at Middleburg High School. </div> 
                 <div class="about">In my free time, I play video games and give my cat love. </div>
                 <div class="post-box" onclick="showPost('helloworld')">
                     <div class="title">Hello, World!</div>
@@ -251,7 +299,7 @@
     </div>
     <div class="main-content" id="contact">
         <div class="contact-box">
-        <div class="header">Contact</div>
+            <div class="header">Contact</div>
             <p>You can send me an email at <a href="mailto:cole@colecancreate.site">cole@colecancreate.site</a>.</p>
             <p>For verification purposes, my Discord tag is <span class="highlight">cole.ec</span>, but I don't accept requests from strangers. Please contact me by email instead.</p>
             <p>I can also be found on social media <a href="https://www.instagram.com/EColeCarter" target="_blank">@EColeCarter</a>.</p>
@@ -278,6 +326,14 @@
                 Make sure you follow me on <a href="https://www.instagram.com/ecolecarter/" target="_blank" class="external-link">Instagram</a> as I'll post when I upload new projects on my story! Thanks for reading my first project post.
             </div>
         </div>
+    </div>
+    <div class="footer">
+    <div class="social-icons">
+            <a href="https://github.com/colecancreate" target="_blank"><img src="github-logo.jpg" alt="GitHub" class="social-icon github-icon"></a>
+            <a href="https://www.instagram.com/EColeCarter" target="_blank"><img src="Instagram.png" alt="Instagram" class="social-icon instagram-icon"></a>
+            <a href="https://www.facebook.com/profile.php?id=100090548004666" target="_blank"><img src="facebook.jpg" alt="Facebook" class="social-icon github-icon"></a>
+        </div>
+        <p>Copyright &copy; 2024 Cole Carter. Site source on <a href="https://github.com/colecancreate/colecancreate" target="_blank">GitHub</a>.</p>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
