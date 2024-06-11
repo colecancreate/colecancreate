@@ -35,6 +35,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     animation: expandNav 2s forwards;
     margin-top: 20px;
+    flex-wrap: wrap; /* Allow wrapping */
 }
 
 @keyframes expandNav {
@@ -317,6 +318,14 @@ body {
         padding: 5px 10px;
     }
 
+    .nav .logo {
+        font-size: 1.2em; /* Smaller logo font size */
+    }
+
+    .nav .links a {
+        font-size: 0.9em; /* Smaller nav links font size */
+    }
+
     .header {
         font-size: 1.5em;
     }
@@ -341,6 +350,18 @@ body {
 
     .text-container {
         max-width: 100%;
+    }
+
+    .about {
+        font-size: 0.9em; /* Smaller font size for the about text */
+    }
+
+    .post-description {
+        font-size: 1em; /* Smaller font size for the post descriptions */
+    }
+
+    .contact-box p {
+        font-size: 0.9em; /* Smaller font size for contact box text */
     }
 }
 
