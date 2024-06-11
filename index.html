@@ -209,7 +209,7 @@ body {
             color: #00ff00;
         }
         .contact-box {
-            background-color: #1e1e1e;
+             background-color: #1e1e1e;
             color: #d4d4d4;
             padding: 20px;
             border-radius: 10px;
@@ -280,6 +280,77 @@ body {
         .social-icons a:hover {
             color: #ffffff;
         }
+/* Mobile Specific Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .nav {
+        padding: 5px 10px;
+    }
+
+    .nav .logo {
+        font-size: 1.2em; /* Smaller logo font size */
+    }
+
+    .nav .links a {
+        font-size: 0.9em; /* Smaller nav links font size */
+    }
+
+    .header {
+        font-size: 1.5em;
+    }
+
+    .post-box,
+    .contact-box,
+    .post-page {
+        width: 95%;
+    }
+
+    .profile-img {
+        width: 100%;
+        height: auto;
+        margin: 20px 0;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .text-container {
+        max-width: 100%;
+    }
+
+    .about {
+        font-size: 0.9em; /* Smaller font size for the about text */
+    }
+
+    .post-description {
+        font-size: 1em; /* Smaller font size for the post descriptions */
+    }
+
+    .contact-box p {
+        font-size: 0.9em; /* Smaller font size for contact box text */
+    }
+        .footer {
+            background-color: #000000;
+            color: #d4d4d4;
+            padding: 5px;
+            border-radius: 10px;
+            margin-top: auto;
+            width: 550px;
+            text-align: center;
+	    font-size .5em;
+        }
+        .footer a {
+            color: #00ff00;
+            text-decoration: none;
+	    font-size .5em;
+        }
+}
     </style>
 </head>
 <body>
