@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ColeCanCreate</title>
     <link rel="icon" type="image/png" href="8bit_me.png">
+    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-AC36p2Gt/ZBOYjD8kK1Z4RVF3H/qlk/5KRy/JRxsEK9tLO4i0ivNLbMEukL+t35VjXgM/2Yvc7KGOFp9Zf4YA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-/* General Styles for All Devices */
+        /* General Styles for All Devices */
 body {
     background-color: black;
     color: #d4d4d4;
@@ -18,10 +19,9 @@ body {
     align-items: center;
     justify-content: flex-start;
     height: 100vh;
-    padding: 20px;
+    padding: 0; /* Changed from 20px to 0 */
     overflow-x: hidden;
 }
-
 .nav {
     width: 0;
     display: flex;
@@ -29,342 +29,257 @@ body {
     padding: 10px 20px;
     background-color: #1e1e1e;
     position: absolute;
-    top: 20px; /* Adjust as needed */
+    top: 0; /* Changed from 20px to 0 */
     left: 0;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     animation: expandNav 2s forwards;
-    margin-top: 20px;
+    margin-top: 0; /* Changed from 20px to 0 */
     flex-wrap: wrap; /* Allow wrapping */
 }
+        @keyframes expandNav {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 98%;
+            }
+        }
 
-@keyframes expandNav {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 98%;
-    }
-}
+        @keyframes showText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-.nav .logo {
-    color: #ffffff;
-    font-size: 1.5em;
-    overflow: hidden;
-    white-space: nowrap;
-    margin-right: auto;
-}
+        .nav .logo,
+        .nav .links a {
+            opacity: 0; /* Initially hide the text */
+            animation: showText 1s forwards; /* Fade in the text */
+            animation-delay: 2s; /* Delay to match the navbar expansion time */
+        }
 
-.nav .links {
-    display: flex;
-    gap: 15px;
-}
-
-.nav .links a {
-    color: #00ff00;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.nav .links a:hover {
-    text-decoration: underline;
-}
-
-.main-content {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 80px;
-    width: 100%;
-}
-
-.main-content.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.content-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 80%;
-    max-width: 1200px;
-}
-
-.text-container {
-    max-width: 60%;
-}
-
-.header {
-    font-size: 2em;
-    color: #ffffff;
-    text-align: left;
-}
-
-.typing-container {
-    display: inline-block;
-    border-right: 2px solid #00ff00;
-    white-space: nowrap;
-    overflow: hidden;
-    font-family: 'Courier New', Courier, monospace;
-    animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-    from, to { border-color: transparent }
-    50% { border-color: #00ff00 }
-}
-
-.highlight {
-    color: #00ff00;
-}
-
-.about {
-    font-size: 1em;
-    color: #d4d4d4;
-    text-align: left;
-    margin-top: 20px;
-    max-width: 600px;
-}
-
-.post-box {
-    background-color: #1e1e1e;
-    color: #d4d4d4;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 30px;
-    width: 600px;
-    text-align: left;
-    cursor: pointer;
-}
-
-.post-box:hover {
-    background-color: #2e2e2e;
-}
-
-.post-box .title {
-    color: #00ff00;
-    font-weight: bold;
-}
-
-.post-box .meta {
-    font-size: 0.9em;
-    color: #aaaaaa;
-    margin-top: 5px;
-}
-
-.profile-img {
-    margin-top: 30px;
-    margin-left: 20px;
-    width: 400px;
-    height: 300px;
-    border-radius: 20px;
-}
-
-.post {
-    margin-top: 20px;
-    font-size: 1em;
-    color: #d4d4d4;
-}
-
-.post a {
-    color: #00ff00;
-    text-decoration: none;
-}
-
-.post a:hover {
-    text-decoration: underline;
-}
-
-.post .post-title {
-    color: #00ff00;
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-.post-description {
-    font-size: 1.2em;
-    color: #ffffff;
-    margin-bottom: 20px;
-    line-height: 1.6em;
-}
-
-.post-meta {
-    font-size: 0.8em;
-    color: #d4d4d4;
-}
-
-.post-page {
-    width: 80%;
-    max-width: 800px;
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-}
-
-.back-button {
-    color: #00ff00;
-    text-decoration: none;
-    cursor: pointer;
-    display: block;
-    margin-bottom: 20px;
-}
-
-.back-button:hover {
-    text-decoration: underline;
-}
-
-.post-title {
-    font-size: 2em;
-    color: #00ff00;
-}
-
-.contact-box {
-    background-color: #1e1e1e;
-    color: #d4d4d4;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 30px;
-    width: 80%;
-    max-width: 800px;
-    text-align: left;
-    border: 2px solid #00ff00;
-}
-
-.contact-box a {
-    color: #00ff00;
-    text-decoration: none;
-}
-
-.contact-box a:hover {
-    text-decoration: underline;
-}
-
-.contact-box .highlight {
-    color: #00ff00;
-}
-
-.post-meta {
-    font-size: 0.9em;
-    color: #aaaaaa;
-    margin-bottom: 20px;
-}
-
-.footer {
-    background-color: #000000;
-    color: #d4d4d4;
-    padding: 5px;
-    border-radius: 10px;
-    margin-top: auto;
-    width: 550px;
-    text-align: center;
-}
-
-.footer a {
-    color: #00ff00;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
-
-.social-icons {
-    display: block;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.social-icons img {
-    margin: 0 0px;    
-    vertical-align: middle;
-}
-
-.social-icons a {
-    color: #00ff00;
-    margin: 0 10px;
-    font-size: 20px;
-    text-decoration: none;
-}
-
-.github-icon {
-    width: 32px;
-    height: 32px;
-}
-
-.instagram-icon {
-    width: 24px;
-    height: 24px;
-}
-
-.facebook-icon {
-    width: 22px;
-    height: 22px;
-}
-
-.social-icons a:hover {
-    color: #ffffff;
-}
-
-/* Mobile Specific Styles */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .nav {
-        padding: 5px 10px;
-    }
-
-    .nav .logo {
-        font-size: 1.2em; /* Smaller logo font size */
-    }
-
-    .nav .links a {
-        font-size: 0.9em; /* Smaller nav links font size */
-    }
-
-    .header {
-        font-size: 1.5em;
-    }
-
-    .post-box,
-    .contact-box,
-    .post-page {
-        width: 95%;
-    }
-
-    .profile-img {
-        width: 100%;
-        height: auto;
-        margin: 20px 0;
-    }
-
-    .content-wrapper {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .text-container {
-        max-width: 100%;
-    }
-
-    .about {
-        font-size: 0.9em; /* Smaller font size for the about text */
-    }
-
-    .post-description {
-        font-size: 1em; /* Smaller font size for the post descriptions */
-    }
-
-    .contact-box p {
-        font-size: 0.9em; /* Smaller font size for contact box text */
-    }
-}
-
+        .nav .logo {
+            color: #ffffff;
+            font-size: 1.5em;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-right: auto;
+        }
+        .nav .links {
+            display: flex;
+            gap: 15px;
+        }
+        .nav .links a {
+            color: #00ff00;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .nav .links a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 80px;
+            width: 100%;
+        }
+        .main-content.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 80%;
+            max-width: 1200px;
+        }
+        .text-container {
+            max-width: 60%;
+        }
+        .header {
+            font-size: 2em;
+            color: #ffffff;
+            text-align: left;
+        }
+        .typing-container {
+            display: inline-block;
+            border-right: 2px solid #00ff00;
+            white-space: nowrap;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff00 }
+        }
+        .highlight {
+            color: #00ff00;
+        }
+        .about {
+            font-size: 1em;
+            color: #d4d4d4;
+            text-align: left;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+        .post-box {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            width: 600px;
+            text-align: left;
+            cursor: pointer;
+        }
+        .post-box:hover {
+            background-color: #2e2e2e;
+        }
+        .post-box .title {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        .post-box .meta {
+            font-size: 0.9em;
+            color: #aaaaaa;
+            margin-top: 5px;
+        }
+        .profile-img {
+            margin-top: 30px;
+            margin-left: 20px;
+            width: 400px;
+            height: 300px;
+            border-radius: 20px;
+        }
+        .post {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #d4d4d4;
+        }
+        .post a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+        .post .post-title {
+            color: #00ff00;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .post-description {
+            font-size: 1.2em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.6em;
+        }
+        .post-meta {
+            font-size: 0.8em;
+            color: #d4d4d4;
+        }
+        .post-page {
+            width: 80%;
+            max-width: 800px;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .back-button {
+            color: #00ff00;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            text-decoration: underline;
+        }
+        .post-title {
+            font-size: 2em;
+            color: #00ff00;
+        }
+        .contact-box {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            width: 80%;
+            max-width: 800px;
+            text-align: left;
+            border: 2px solid #00ff00;
+        }
+        .contact-box a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+        .contact-box .highlight {
+            color: #00ff00;
+        }
+        .post-meta {
+            font-size: 0.9em;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+        }
+        .footer {
+            background-color: #000000;
+            color: #d4d4d4;
+            padding: 5px;
+            border-radius: 10px;
+            margin-top: auto;
+            width: 550px;
+            text-align: center;
+        }
+        .footer a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+	.social-icons {
+	    display: block;
+	    justify-content: center;
+	    margin-top: 10px;
+	}
+	.social-icons img {
+	    margin: 0 0px;	
+	    vertical-align: middle;
+	}
+        .social-icons a {
+            color: #00ff00;
+            margin: 0 10px;
+            font-size: 20px;
+            text-decoration: none;
+	}
+	.github-icon {
+	    width: 32px;
+	    height: 32px;
+	}
+	.instagram-icon {
+	    width: 24px;
+	    height: 24px;
+	}	
+	.facebook-icon {
+	    width: 22px;
+	    height: 22px;
+        }
+        .social-icons a:hover {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -382,8 +297,8 @@ body {
                 <div class="header">
                     <div class="typing-container" id="typing-container"></div>
                 </div>
-                <div class="about">I'm a 17 year old in my senior year at Middleburg High School.</div> 
-                <div class="about">In my free time, I play video games and give my cat love.</div>
+                <div class="about">I'm a 17 year old in my senior year at Middleburg High School. </div> 
+                <div class="about">In my free time, I play video games and give my cat love. </div>
                 <div class="post-box" onclick="showPost('helloworld')">
                     <div class="title">Hello, World!</div>
                     <div class="meta">6/2/24 - 1 min read</div>
@@ -432,7 +347,8 @@ body {
         </div>
     </div>
     <div class="footer">
-        <div class="social-icons">
+    <div
+class="social-icons">
             <a href="https://github.com/colecancreate" target="_blank"><img src="github-logo.jpg" alt="GitHub" class="social-icon github-icon"></a>
             <a href="https://www.instagram.com/EColeCarter" target="_blank"><img src="Instagram.png" alt="Instagram" class="social-icon instagram-icon"></a>
             <a href="https://www.facebook.com/profile.php?id=100090548004666" target="_blank"><img src="Facebook.jpg" alt="Facebook" class="social-icon github-icon"></a>
@@ -440,52 +356,53 @@ body {
         <p>Copyright &copy; 2024 Cole Carter. Site source on <a href="https://github.com/colecancreate/colecancreate" target="_blank">GitHub</a>.</p>
     </div>
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const hash = window.location.hash.substring(1);
-    if (hash) {
-        showSection(hash);
-    } else {
-        showSection('home');
-    }
-    startTypingEffect();
-});
-
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.main-content');
-    sections.forEach(section => section.classList.remove('active'));
-    const section = document.getElementById(sectionId);
-    if (section) {
-        section.classList.add('active');
-        window.history.pushState(null, null, `#${sectionId}`);
-    }
-}
-
-function showPost(postId) {
-    showSection(postId);
-}
-
-function startTypingEffect() {
-    const text = "Hi, I'm Cole.";
-    const speed = 200;
-    const typingContainer = document.getElementById('typing-container');
-    let index = 0;
-
-    function type() {
-        if (index < text.length) {
-            if (index >= 8 && index <= 11) {
-                typingContainer.innerHTML += `<span style='color: #00ff00;'>${text[index]}</span>`;
+        document.addEventListener("DOMContentLoaded", function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showSection(hash);
             } else {
-                typingContainer.innerHTML += text[index];
+                showSection('home');
             }
-            index++;
-            setTimeout(type, speed);
-        } else {
-            typingContainer.style.borderRight = '2px solid #00ff00';
-        }
-    }
+            startTypingEffect();
+        });
 
-    type();
-}
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.main-content');
+            sections.forEach(section => section.classList.remove('active'));
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('active');
+                window.history.pushState(null, null, `#${sectionId}`);
+            }
+        }
+
+        function showPost(postId) {
+            showSection(postId);
+        }
+
+        function startTypingEffect() {
+            const text = "Hi, I'm Cole.";
+            const speed = 200;
+            const typingContainer = document.getElementById('typing-container');
+            let index = 0;
+
+            function type() {
+                if (index < text.length) {
+                    if (index >= 8 && index <= 11) {
+                        typingContainer.innerHTML += `<span style='color: #00ff00;'>${text[index]}</span>`;
+                    } else {
+                        typingContainer.innerHTML += text[index];
+                    }
+                    index++;
+                    setTimeout(type, speed);
+                } else {
+                    typingContainer.style.borderRight = '2px solid #00ff00';
+                }
+            }
+
+            type();
+        }
     </script>
 </body>
 </html>
+
